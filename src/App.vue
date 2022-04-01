@@ -91,3 +91,21 @@ export default {
   }
 }
 </script>
+<style>
+@font-face {
+  font-family: "Augusta";
+  src: local("Augusta"),
+   url(./fonts/Typo_Augusta.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Gabriola";
+  src: local("Gabriola"),
+   url(./fonts/Typo_Gabriola.ttf) format("truetype");
+}
+h2, h4 {
+    font-family: "Augusta";
+}
+h3, .Gabriola, .submit-form {
+  font-family: "Gabriola";
+}
+</style>

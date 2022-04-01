@@ -1,5 +1,8 @@
 <template>
   <div class="submit-form">
+    <h2>
+      S'inscrire
+    </h2>
     <div class="card card-container">
       <img
           id="profile-img"
@@ -75,6 +78,7 @@
             class="form-control"
             id="pwdUser"
             required
+            placeholder="Votre petit secret"
             v-model="user.pwdUser"
             name="pwdUser"
           />

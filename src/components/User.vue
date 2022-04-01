@@ -1,7 +1,7 @@
 <template>
   <div v-if="currentUser" class="edit-form">
     <h4>User</h4>
-    <form>
+    <form class="Gabriola">
       <div class="form-group">
         <label for="userLastName">Nom</label>
         <input type="text" class="form-control" id="userLastName"
@@ -41,39 +41,41 @@
         {{ currentUser.isMember ? "Oui" : "Non" }}
       </div>
     </form>
-    <button class="badge badge-primary mr-2"
-      v-if="currentUser.isCA"
-      @click="updateCAStatus(false)"
-    >
-      Enlever du CA
-    </button>
-    <button v-else class="badge badge-primary mr-2"
-      @click="updateCAStatus(true)"
-    >
-      Mettre au CA
-    </button>
-    <button class="badge badge-primary mr-2"
-      v-if="currentUser.isMember"
-      @click="updateMemberStatus(false)"
-    >
-      Enlever des membres
-    </button>
-    <button v-else class="badge badge-primary mr-2"
-      @click="updateMemberStatus(true)"
-    >
-      Ajouter aux membres
-    </button>
-    <button class="badge badge-danger mr-2"
-      @click="deleteUser"
-    >
-      Supprimer
-    </button>
-    <button type="submit" class="badge badge-success"
-      @click="updateUser"
-    >
-      Mettre à jour
-    </button>
-    <p>{{ message }}</p>
+    <div class="Gabriola">
+      <button class="badge badge-primary mr-2"
+        v-if="currentUser.isCA"
+        @click="updateCAStatus(false)"
+      >
+        Enlever du CA
+      </button>
+      <button v-else class="badge badge-primary mr-2"
+        @click="updateCAStatus(true)"
+      >
+        Mettre au CA
+      </button>
+      <button class="badge badge-primary mr-2"
+        v-if="currentUser.isMember"
+        @click="updateMemberStatus(false)"
+      >
+        Enlever des membres
+      </button>
+      <button v-else class="badge badge-primary mr-2"
+        @click="updateMemberStatus(true)"
+      >
+        Ajouter aux membres
+      </button>
+      <button class="badge badge-danger mr-2"
+        @click="deleteUser"
+      >
+        Supprimer
+      </button>
+      <button type="submit" class="badge badge-success"
+        @click="updateUser"
+      >
+        Mettre à jour
+      </button>
+      <p>{{ message }}</p>
+    </div>
   </div>
   <div v-else>
     <br />

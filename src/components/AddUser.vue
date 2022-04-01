@@ -1,5 +1,8 @@
 <template>
   <div class="submit-form">
+    <h2>
+      Nouveau membre :
+    </h2>
     <div class="card card-container">
       <div v-if="!submitted">
         <div class="form-group">
@@ -69,6 +72,7 @@
             class="form-control"
             id="pwdUser"
             required
+            placeholder="Votre petit secret"
             v-model="user.pwdUser"
             name="pwdUser"
           />
@@ -84,6 +88,7 @@
 </template>
 <script>
 import UserDataService from "../services/UserDataService";
+import SHA256 from '../security/hash';
 export default {
   name: "add-user",
   data() {
@@ -112,7 +117,7 @@ export default {
         isMember: this.user.isMember,
         userCity: this.user.userCity,
         phoneNumber: this.user.phoneNumber,
-        pwdUser: this.user.pwdUser
+        pwdUser: SHA256(this.user.pwdUser)
       };
       UserDataService.create(data)
         .then(response => {

@@ -25,7 +25,8 @@ const routes =  [
   {
     path: '/profile',
     name: 'profile',
-    component : () => import("./components/Profile.vue")
+    component: HomePage
+    //component : () => import("./components/Profile.vue")
   },
   {
     path: '/user',
@@ -59,17 +60,17 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const privatePages = ['/user/list', '/user/add', '/user/'];
-  const authRequired = privatePages.includes(to.path);
-  const loggedIn = /*this.$store.state.auth.status.loggedIn*/localStorage.getItem('user')// && sessionStorage.getItem('token'));
-  // trying to access a restricted page + not logged in
-  // redirect to login page
-  if (authRequired && !loggedIn) {
-    next('/Login.vue');
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const privatePages = ['/user/list', '/user/add', '/user/'];
+//   const authRequired = privatePages.includes(to.path);
+//   const loggedIn = /*this.$store.state.auth.status.loggedIn*/localStorage.getItem('user')// && sessionStorage.getItem('token'));
+//   // trying to access a restricted page + not logged in
+//   // redirect to login page
+//   if (authRequired && !loggedIn) {
+//     next('/Login.vue');
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

@@ -1,5 +1,8 @@
 <template>
   <div class="submit-form" >
+    <h2>
+        Se connecter
+     </h2>
     <div class="card card-container" style="margin-bottom: 100px">
       <img
         id="profile-img"
@@ -10,12 +13,12 @@
       <Form @submit="handleLogin" :validation-schema="schema">
         <div class="form-group">
           <label for="email">Email</label>
-          <Field name="email" type="email" class="form-control" />
+          <Field name="email" type="email" placeholder="votremail@domaine.com" class="form-control" />
           <ErrorMessage name="email" class="error-feedback" />
         </div>
         <div class="form-group">
           <label for="password">Mot de passe</label>
-          <Field name="password" type="password" class="form-control" />
+          <Field name="password" type="password" placeholder="Votre petit secret" class="form-control" />
           <ErrorMessage name="password" class="error-feedback" />
         </div>
         <div class="form-group">

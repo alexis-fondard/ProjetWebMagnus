@@ -1,16 +1,16 @@
 <template>
   <div class="list row">
     <div class="col-md-8">
-      <div class="input-group mb-3">
+      <div class=" input-group mb-3">
         <input
           type="text"
-          class="form-control"
+          class="Gabriola form-control"
           placeholder="Rechercher par nom de ville"
           v-model="userCity"
         />
         <div class="input-group-append">
           <button
-            class="btn btn-outline-secondary"
+            class="Gabriola btn btn-outline-secondary"
             type="buttonr"
             @click="searchUserCity()"
           >
@@ -23,7 +23,7 @@
       <h4>Liste des utilisateurs</h4>
       <ul class="list-group">
         <li
-          class="list-group-item"
+          class="Gabriola list-group-item"
           :class="{ active: index == currentIndex }"
           v-for="(user, index) in users"
           :key="index"
@@ -37,7 +37,7 @@
       </button> -->
     </div>
     <div class="col-md-6">
-      <div v-if="currentUser">
+      <div class="Gabriola" v-if="currentUser">
         <h4>Utilisateur</h4>
         <div>
           <label><strong>Nom:</strong></label> {{ currentUser.userLastName }}
@@ -64,17 +64,17 @@
           <label><strong>Numéro de téléphone:</strong></label>
           {{ currentUser.phoneNumber }}
         </div>
-        <div>
+        <!-- <div>
           <label><strong>Mot de passe:</strong></label>
           {{ currentUser.pwdUser }}
-        </div>
+        </div> -->
         <router-link :to="'/user/' + currentUser.id" class="badge badge-warning"
           >Modifier</router-link
         >
       </div>
       <div v-else>
         <br />
-        <p>Veuillez sélectionner un utilisateur...</p>
+        <p class="Gabriola">Veuillez sélectionner un utilisateur...</p>
       </div>
     </div>
   </div>

@@ -1,11 +1,12 @@
 import axios from 'axios';
+import SHA256 from '../security/hash';
 const API_URL = process.env.VUE_APP_API_URL;
 class AuthService {
   login(user) {
     return axios
       .post(API_URL + 'user/login', {
         userEmail: user.email,
-        pwdUser: user.password
+        pwdUser: SHA256(user.password)
       })
       .then(response => {
         if (response.data.accessToken) {
