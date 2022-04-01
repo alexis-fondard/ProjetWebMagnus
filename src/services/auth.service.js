@@ -3,9 +3,9 @@ const API_URL = process.env.VUE_APP_API_URL;
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + 'signin', {
-        username: user.username,
-        password: user.password
+      .post(API_URL + 'user/login', {
+        userEmail: user.email,
+        pwdUser: user.password
       })
       .then(response => {
         if (response.data.accessToken) {
@@ -14,15 +14,15 @@ class AuthService {
         return response.data;
       });
   }
-  logout() {
-    localStorage.removeItem('user');
-  }
-  register(user) {
-    return axios.post(API_URL + 'signup', {
-      username: user.username,
-      email: user.email,
-      password: user.password
-    });
-  }
+  // logout() {
+  //   localStorage.removeItem('user');
+  // }
+  // register(user) {
+  //   return axios.post(API_URL + 'signup', {
+  //     username: user.username,
+  //     email: user.email,
+  //     password: user.password
+  //   });
+  // }
 }
 export default new AuthService();

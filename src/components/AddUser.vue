@@ -1,82 +1,84 @@
 <template>
   <div class="submit-form">
-    <div v-if="!submitted">
-      <div class="form-group">
-        <label for="userLastName">Nom</label>
-        <input
-          type="text"
-          class="form-control"
-          id="userLastName"
-          placeholder="DUPONT"
-          required
-          v-model="user.userLastName"
-          name="userLastName"
-        />
+    <div class="card card-container">
+      <div v-if="!submitted">
+        <div class="form-group">
+          <label for="userLastName">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userLastName"
+            placeholder="DUPONT"
+            required
+            v-model="user.userLastName"
+            name="userLastName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="userFirstName">Prénom</label>
+          <input
+            class="form-control"
+            id="userFirstName"
+            placeholder="Jean"
+            required
+            v-model="user.userFirstName"
+            name="userFirstName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="userEmail">Mail</label>
+          <input
+            type="mail"
+            class="form-control"
+            id="userEmail"
+            placeholder="votremail@domaine.com"
+            required
+            v-model="user.userEmail"
+            name="userEmail"
+          />
+        </div>
+        <div class="form-group">
+          <label for="userCity">Ville</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userCity"
+            placeholder="Buis les baronnies"
+            required
+            v-model="user.userCity"
+            name="userCity"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Numéro de téléphone</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phoneNumber"
+            pattern="[+]{1}[0-9]{11,14}"
+            placeholder="+33123456789"
+            required
+            v-model="user.phoneNumber"
+            name="phoneNumber"
+          />
+        </div>
+        <div class="form-group">
+          <label for="pwdUser">Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            id="pwdUser"
+            required
+            v-model="user.pwdUser"
+            name="pwdUser"
+          />
+        </div>
+        <button @click="saveUser" class="btn btn-success">Soumettre</button>
       </div>
-      <div class="form-group">
-        <label for="userFirstName">Prénom</label>
-        <input
-          class="form-control"
-          id="userFirstName"
-          placeholder="Jean"
-          required
-          v-model="user.userFirstName"
-          name="userFirstName"
-        />
+      <div v-else>
+        <h4>Réponse soumise avec succès !</h4>
+        <button class="btn btn-success" @click="newUser">Ajouter un autre utilisateur</button>
       </div>
-      <div class="form-group">
-        <label for="userEmail">Mail</label>
-        <input
-          type="mail"
-          class="form-control"
-          id="userEmail"
-          placeholder="votremail@domaine.com"
-          required
-          v-model="user.userEmail"
-          name="userEmail"
-        />
-      </div>
-      <div class="form-group">
-        <label for="userCity">Ville</label>
-        <input
-          type="text"
-          class="form-control"
-          id="userCity"
-          placeholder="Buis les baronnies"
-          required
-          v-model="user.userCity"
-          name="userCity"
-        />
-      </div>
-      <div class="form-group">
-        <label for="phoneNumber">Numéro de téléphone</label>
-        <input
-          type="tel"
-          class="form-control"
-          id="phoneNumber"
-          pattern="[+]{1}[0-9]{11,14}"
-          placeholder="+33123456789"
-          required
-          v-model="user.phoneNumber"
-          name="phoneNumber"
-        />
-      </div>
-      <div class="form-group">
-        <label for="pwdUser">Mot de passe</label>
-        <input
-          type="password"
-          class="form-control"
-          id="pwdUser"
-          required
-          v-model="user.pwdUser"
-          name="pwdUser"
-        />
-      </div>
-      <button @click="saveUser" class="btn btn-success">Soumettre</button>
-    </div>
-    <div v-else>
-      <h4>Réponse soumise avec succès !</h4>
-      <button class="btn btn-success" @click="newUser">Ajouter un autre utilisateur</button>
     </div>
   </div>
 </template>

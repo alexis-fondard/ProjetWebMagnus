@@ -1,82 +1,111 @@
 <template>
-  <div class="col-md-12">
+  <div class="submit-form">
     <div class="card card-container">
       <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <Form @submit="handleRegister" :validation-schema="schema">
-        <div v-if="!successful">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <Field name="username" type="text" class="form-control" />
-            <ErrorMessage name="username" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <Field name="email" type="email" class="form-control" />
-            <ErrorMessage name="email" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <Field name="password" type="password" class="form-control" />
-            <ErrorMessage name="password" class="error-feedback" />
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary btn-block" :disabled="loading">
-              <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm"
-              ></span>
-              Sign Up
-            </button>
-          </div>
+          id="profile-img"
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          class="profile-img-card"
+          style="max-width: 300px; max-height: 200px; margin: auto;"
+        />
+      <div v-if="!submitted">
+        <div class="form-group">
+          <label for="userLastName">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userLastName"
+            placeholder="DUPONT"
+            required
+            v-model="user.userLastName"
+            name="userLastName"
+          />
         </div>
-      </Form>
-      <div
-        v-if="message"
-        class="alert"
-        :class="successful ? 'alert-success' : 'alert-danger'"
-      >
-        {{ message }}
+        <div class="form-group">
+          <label for="userFirstName">Prénom</label>
+          <input
+            class="form-control"
+            id="userFirstName"
+            placeholder="Jean"
+            required
+            v-model="user.userFirstName"
+            name="userFirstName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="userEmail">Mail</label>
+          <input
+            type="mail"
+            class="form-control"
+            id="userEmail"
+            placeholder="votremail@domaine.com"
+            required
+            v-model="user.userEmail"
+            name="userEmail"
+          />
+        </div>
+        <div class="form-group">
+          <label for="userCity">Ville</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userCity"
+            placeholder="Buis les baronnies"
+            required
+            v-model="user.userCity"
+            name="userCity"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Numéro de téléphone</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phoneNumber"
+            pattern="[+]{1}[0-9]{11,14}"
+            placeholder="+33123456789"
+            required
+            v-model="user.phoneNumber"
+            name="phoneNumber"
+          />
+        </div>
+        <div class="form-group">
+          <label for="pwdUser">Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            id="pwdUser"
+            required
+            v-model="user.pwdUser"
+            name="pwdUser"
+          />
+        </div>
+        <button @click="saveUser" class="btn btn-success">Soumettre</button>
+      </div>
+      <div v-else>
+        <h4>Réponse soumise avec succès !</h4>
+        <button class="btn btn-success" @click="newUser">Ajouter un autre utilisateur</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
+import UserDataService from "../services/UserDataService";
 export default {
-  name: "global-register",
-  components: {
-    Form,
-    Field,
-    ErrorMessage,
-  },
+  name: "add-user",
   data() {
-    const schema = yup.object().shape({
-      username: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
-      email: yup
-        .string()
-        .required("Email is required!")
-        .email("Email is invalid!")
-        .max(50, "Must be maximum 50 characters!"),
-      password: yup
-        .string()
-        .required("Password is required!")
-        .min(6, "Must be at least 6 characters!")
-        .max(40, "Must be maximum 40 characters!"),
-    });
     return {
-      successful: false,
-      loading: false,
-      message: "",
-      schema,
+      user: {
+        id: null,
+        userLastName: "",
+        userFirstName: "",
+        userEmail: "",
+        isCA: false,
+        isMember: false,
+        userCity: "",
+        phoneNumber: "",
+        pwdUser: ""
+      },
+      submitted: false
     };
   },
   computed: {
@@ -90,31 +119,38 @@ export default {
     }
   },
   methods: {
-    handleRegister(user) {
-      this.message = "";
-      this.successful = false;
-      this.loading = true;
-      this.$store.dispatch("auth/register", user).then(
-        (data) => {
-          this.message = data.message;
-          this.successful = true;
-          this.loading = false;
-        },
-        (error) => {
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          this.successful = false;
-          this.loading = false;
-        }
-      );
+    saveUser() {
+      var data = {
+        userLastName: this.user.userLastName,
+        userFirstName: this.user.userFirstName,
+        userEmail: this.user.userEmail,
+        isCA: this.user.isCA,
+        isMember: this.user.isMember,
+        userCity: this.user.userCity,
+        phoneNumber: this.user.phoneNumber,
+        pwdUser: this.user.pwdUser
+      };
+      UserDataService.create(data)
+        .then(response => {
+          this.user.id = response.data.id;
+          console.log(response.data);
+          this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
-  },
+    
+    newUser() {
+      this.submitted = false;
+      this.user = {};
+    }
+  }
 };
 </script>
-<style scoped>
-/* ... */
+<style>
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
 </style>

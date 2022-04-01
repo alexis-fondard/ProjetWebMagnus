@@ -1,10 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" style="position: relative;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <router-link to="/" class="navbar-brand">Magnus</router-link>
+      <router-link to="/" class="navbar-brand">
+        <img src="./assets/Logo-Typo.svg" width="100" height="50" class="d-inline-block align-top" alt="Logo_Typo_Magnus">
+      </router-link>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
@@ -50,14 +52,27 @@
     <div class="container mt-3">
       <router-view />
     </div>
-    <!-- TODO: -->
   </div>
+  <footerSite/>
 </template>
 <script>
+import footerSite from '@/components/FooterSite.vue';
 export default {
-  name: "app",
+  name: "app-magnus",
+  data: () => ({
+    icons: [
+      'mdi-facebook',
+      'mdi-twitter',
+      'mdi-linkedin',
+      'mdi-instagram',
+    ],
+  }),
+  components: {
+    footerSite
+  },
   computed: {
     loggedIn() {
+      console.log(this.$store.state.auth.status.loggedIn)
       return this.$store.state.auth.status.loggedIn;
     },
     currentUser() {

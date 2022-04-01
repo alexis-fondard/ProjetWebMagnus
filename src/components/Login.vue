@@ -1,24 +1,25 @@
 <template>
-  <div class="col-md-12">
-    <div class="card card-container">
+  <div class="submit-form" >
+    <div class="card card-container" style="margin-bottom: 100px">
       <img
         id="profile-img"
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
+        style="max-width: 300px; max-height: 200px; margin: auto;"
       />
       <Form @submit="handleLogin" :validation-schema="schema">
         <div class="form-group">
-          <label for="username">Username</label>
-          <Field name="username" type="text" class="form-control" />
-          <ErrorMessage name="username" class="error-feedback" />
+          <label for="email">Email</label>
+          <Field name="email" type="email" class="form-control" />
+          <ErrorMessage name="email" class="error-feedback" />
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">Mot de passe</label>
           <Field name="password" type="password" class="form-control" />
           <ErrorMessage name="password" class="error-feedback" />
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" :disabled="loading">
+          <button class="btn btn-success" :disabled="loading">
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
@@ -47,8 +48,8 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      username: yup.string().required("Username is required!"),
-      password: yup.string().required("Password is required!"),
+      email: yup.string().required("L'email est requis !"),
+      password: yup.string().required("Le mot de passe est requis !"),
     });
     return {
       loading: false,
@@ -87,6 +88,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-/* ... */
-</style>
